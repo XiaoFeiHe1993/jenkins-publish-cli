@@ -1,0 +1,27 @@
+{
+  "name": "jpublish",
+  "version": "1.0.0",
+  "description": "jenkins命令行发布工具",
+  "main": "./index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XiaoFeiHe1993/jenkins-publish-cli"
+  },
+  "engines": {
+    "node": ">=10.18.1"
+  },
+  "author": "XiaoFeiHe1993",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "inquirer": "^8.2.0",
+    "node-localstorage": "^2.2.1",
+    "ora": "^4.1.0"
+  }
+}
