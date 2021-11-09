@@ -15,7 +15,6 @@ function getUserConfig() {
 }
 
 function startBuildTestProject({ url, buildUrl, searchUrl, startTime }) {
-  console.log(chalk.green('第一步获取Jenkins-Crumb'))
   const { username, password } = getUserConfig()
   axios
     .get(`${url}/crumbIssuer/api/json`, {
@@ -36,7 +35,7 @@ function startBuildTestProject({ url, buildUrl, searchUrl, startTime }) {
 }
 
 function startBuildJob({ buildUrl, searchUrl, username, password, crumb, startTime }) {
-  console.log(chalk.green('第二步开始build项目'))
+  console.log(chalk.green('开始build项目'))
   axios
     .post(
       buildUrl,
@@ -62,7 +61,7 @@ function startBuildJob({ buildUrl, searchUrl, username, password, crumb, startTi
 }
 
 function startSearchResult({ searchUrl, username, password, crumb, startTime }) {
-  console.log(chalk.green('第三步开始查询执行结果'))
+  console.log(chalk.green('查询执行结果'))
   spinner.start()
   const loopId = setInterval(() => {
     axios
@@ -85,6 +84,9 @@ function startSearchResult({ searchUrl, username, password, crumb, startTime }) 
           clearInterval(loopId)
           console.log(chalk.green('发布成功'))
           process.exit(0)
+        } else {
+          const date = new Date()
+          console.log(chalk.green(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`))
         }
       })
       .catch((error) => {

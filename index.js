@@ -4,7 +4,7 @@ const pkg = require('./package.json')
 const { Command } = require('commander')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
-const utils = require('utils.js')
+const utils = require('./utils.js')
 const jenkins = require("./jenkins.js")
 
 const program = new Command()
@@ -17,7 +17,7 @@ program
   .command('deploy')
   .description('通过jenkins发布测试环境项目')
   .action(() => {
-    console.log(chalk.green('开始发布项目'))
+    console.log(chalk.green('初始化'))
     let startTime = new Date().getTime()
     const argus = process.argv.slice(2, process.argv.length)
     let local = require('node-localstorage').LocalStorage
