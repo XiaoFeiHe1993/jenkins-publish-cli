@@ -85,8 +85,10 @@ function startSearchResult({ searchUrl, username, password, crumb, startTime }) 
           console.log(chalk.green('发布成功'))
           process.exit(0)
         } else {
+          spinner.stop()
           const date = new Date()
           console.log(chalk.green(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`))
+          spinner.start()
         }
       })
       .catch((error) => {
