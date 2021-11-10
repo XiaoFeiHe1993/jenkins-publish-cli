@@ -14,7 +14,7 @@ program.usage('[command] [options]').version(pkg.version, '-V')
 program.on('--help', () => {})
 
 program
-  .command('deploy')
+  .command('publish')
   .description('通过jenkins发布测试环境项目')
   .action(() => {
     console.log(chalk.green('初始化'))
@@ -23,7 +23,7 @@ program
     let local = require('node-localstorage').LocalStorage
     let localStorage = new local('./jenkins')
     if (!localStorage.getItem('jenkins-projects')) {
-      console.log(chalk.red('请先执行 jpublish project 完成项目配置'))
+      console.log(chalk.red('请先执行 jupdate project 完成项目配置'))
       process.exit(0)
     }
     projects = JSON.parse(localStorage.getItem('jenkins-projects'))
@@ -35,7 +35,7 @@ program
         startTime,
       })
     } else {
-      console.log(chalk.red('请先执行 jpublish project 完成项目配置'))
+      console.log(chalk.red('请先执行 jupdate project 完成项目配置'))
     }
   })
 

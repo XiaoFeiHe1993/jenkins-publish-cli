@@ -8,7 +8,7 @@ function getUserConfig() {
   let local = require('node-localstorage').LocalStorage
   let localStorage = new local('./jenkins')
   if (!localStorage.getItem('jenkins-username') || !localStorage.getItem('jenkins-password')) {
-    console.log(chalk.red('请先执行 jpublish user 命令，配置系统用户名、密码。'))
+    console.log(chalk.red('请先执行 jupdate user 命令，配置系统用户名、密码。'))
     process.exit(0)
   }
   return { username: localStorage.getItem('jenkins-username'), password: localStorage.getItem('jenkins-password') }

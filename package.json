@@ -1,5 +1,5 @@
 {
-  "name": "jpublish",
+  "name": "jupdate",
   "version": "1.0.0",
   "description": "jenkins命令行发布工具",
   "main": "./index.js",
@@ -14,7 +14,7 @@
   "engines": {
     "node": ">=10.18.1"
   },
-  "author": "XiaoFeiHe1993",
+  "author": "jackfei",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0",
