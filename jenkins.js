@@ -4,18 +4,23 @@ const ora = require('ora')
 
 const spinner = ora('loading...')
 
-function getUserConfig() {
+function getUserConfig(url) {
   let local = require('node-localstorage').LocalStorage
   let localStorage = new local('./jenkins')
-  if (!localStorage.getItem('jenkins-username') || !localStorage.getItem('jenkins-password')) {
+  if (!localStorage.getItem('jenkins-user')) {
     console.log(chalk.red('请先执行 jupdate user 命令，配置系统用户名、密码。'))
     process.exit(0)
   }
-  return { username: localStorage.getItem('jenkins-username'), password: localStorage.getItem('jenkins-password') }
+  let users = JSON.parse(localStorage.getItem('jenkins-user'))
+  if (!users[url].userName || !users[url].password) {
+    console.log(chalk.red('请先执行 jupdate user 命令，配置系统用户名、密码。'))
+    process.exit(0)
+  }
+  return { username: users[url].userName, password: users[url].password }
 }
 
 function startBuildTestProject({ url, buildUrl, searchUrl, startTime }) {
-  const { username, password } = getUserConfig()
+  const { username, password } = getUserConfig(url)
   axios
     .get(`${url}/crumbIssuer/api/json`, {
       auth: {

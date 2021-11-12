@@ -10,4 +10,4 @@
 
 4. jupdate publish projectName 发布项目
 
-![示例](./20211109174639.png)
+![示例](./20211112143933.png)

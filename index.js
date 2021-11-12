@@ -51,6 +51,11 @@ const userAsk = () => {
     name: 'jenkinsPassword',
     message: '请输入jenkins密码',
   })
+  prompts.push({
+    type: 'input',
+    name: 'jenkinsUrl',
+    message: '请输入jenkins地址',
+  })
   return inquirer.prompt(prompts)
 }
 program
@@ -58,10 +63,22 @@ program
   .description('配置jenkins管理员用户名、密码')
   .action(() => {
     userAsk().then((answers) => {
+      if (!utils.checkUrl(answers.jenkinsUrl)) {
+        console.log(chalk.red('请输入正确的url'))
+        process.exit(0)
+      }
       let local = require('node-localstorage').LocalStorage
       let localStorage = new local('./jenkins')
-      localStorage.setItem('jenkins-username', answers.jenkinsUsername)
-      localStorage.setItem('jenkins-password', answers.jenkinsPassword)
+      let users = {}
+      if (localStorage.getItem('jenkins-user')) {
+        users = JSON.parse(localStorage.getItem('jenkins-user'))
+      }
+      users[answers.jenkinsUrl] = {
+        url: answers.jenkinsUrl,
+        userName: answers.jenkinsUsername,
+        password: answers.jenkinsPassword,
+      }
+      localStorage.setItem('jenkins-user', JSON.stringify(users))
     })
   })
 
